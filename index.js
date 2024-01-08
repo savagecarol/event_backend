@@ -1,13 +1,24 @@
 const express = require('express');
-require('dotenv').config(); // urls , port , redis config , variables that can be use in whole project
-
-// making object of express
+const cors = require('cors'); 
+const corsOption  = require ('./utils/cors'); 
+const swaggerSpec = require('./utils/swagger'); 
+const swaggerUi = require('swagger-ui-express');
+const bodyParser = require('body-parser');
+require('dotenv').config(); 
 const app = express();
 
-//port
+/**
+ * PORT
+ */
 const PORT = process.env.PORT;
 
-// middleware
+/**
+ * MIDDLEWARE
+ */
+
+/**
+ * print the apis
+ */
 app.use((req, res, next) => {
     const { method, path } = req;
     console.log(
@@ -16,7 +27,29 @@ app.use((req, res, next) => {
     next();
   });
 
+/**
+ * cors
+ */
+app.use(cors(corsOption)); 
 
+/**
+ * json body parser
+ */
+app.use(bodyParser.json()); 
+
+/**
+ * Url encoded body parser
+ */
+app.use(bodyParser.urlencoded({ extended: true }));
+
+/**
+ * swagger
+ */
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
+/**
+ * starting the server
+ */
 app.listen(PORT , () => {
     console.log(`Server is up on port ${PORT}.`);
 })
