@@ -48,6 +48,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 /**
+ * api route
+ */
+app.use('/api', route); 
+
+/**
  * starting the server
  */
 app.listen(PORT , () => {
