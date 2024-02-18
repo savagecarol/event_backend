@@ -1,4 +1,6 @@
 const swaggerJSDoc = require('swagger-jsdoc');
+const path = require('path');
+
 
 // swagger specification
 const options = {
@@ -7,10 +9,10 @@ const options = {
     info: {
       title: 'CONNECT BACKEND',
       version: '1.0.0',
-      description: '',
+      description: 'Connecting by event',
     },
   },
-  apis: ['./routes/*.js'], 
+  apis: ['./route/*.js'], 
 };
 
 const swaggerSpec = swaggerJSDoc(options);
