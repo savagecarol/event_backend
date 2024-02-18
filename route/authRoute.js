@@ -2,23 +2,36 @@ const express = require('express');
 const AuthController = require('../controller/authController');
 const router = express.Router();
 
+
 /**
  * @swagger
  * /api/auth/v1/send-otp:
- *   get:
+ *   post:
  *     tags: [Auth] 
- *     summary: Send otp
- *     description: send otp to the phone number
+ *     summary: Send OTP
+ *     description: Send OTP to the phone number
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               phoneNumber:
+ *                 type: string
+ *                 description: The phone number to which OTP will be sent
+ *             example:
+ *               phoneNumber: "+1234567890"
  *     responses:
  *       200:
- *         description: successful response if send otp
+ *         description: Successful response if OTP is sent
  */
 router.post('/v1/send-otp', AuthController.sendOTP);
 
 /**
  * @swagger
  * /api/auth/v1/validate-otp:
- *   get:
+ *   post:
  *     tags: [Auth] 
  *     summary: validate otp
  *     description: validate otp.

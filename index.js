@@ -6,6 +6,7 @@ const swaggerUi = require('swagger-ui-express');
 const bodyParser = require('body-parser');
 const route = require('./route/route');
 require('dotenv').config(); 
+const firebase = require('./utils/firebase');
 const app = express();
 
 /**
@@ -56,6 +57,7 @@ app.use('/api', route);
 /**
  * starting the server
  */
+
 app.listen(PORT , () => {
     console.log(`Server is up on port ${PORT}.`);
 })
